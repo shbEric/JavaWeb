@@ -1,12 +1,16 @@
 package com.super404.web;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+//新版Servelt，也就是3.0之后，支持注解的方式
+//@WebServlet("/userServlet")
+@WebServlet(name = "userServlet", urlPatterns = {"/user1","/user2","/userServlet"})
 public class UserServlet extends HttpServlet {
 
     @Override
