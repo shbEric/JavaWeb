@@ -1,5 +1,6 @@
 package com.super404.web;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +25,13 @@ public class UserServlet extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
         printWriter.write("<div> doGet hello Word! 你好，中文！ </div>");
+
+        ServletContext servletContext = req.getServletContext();
+        String url = servletContext.getInitParameter("url");
+        System.out.println(url);
+
+        servletContext.setAttribute("appInfo","super404.com info");
+
     }
 
     @Override
