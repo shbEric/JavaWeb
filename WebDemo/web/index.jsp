@@ -13,18 +13,13 @@
   <body>
   <div>小滴课堂</div>
 
-  <div>
-      <%
-          out.println("getRequestURL is " + request.getRequestURL());
-          out.println("小滴课堂 java学习");
-      %>
-  </div>
 
-  <br/>
-
-  <div>
-      <%= request.getRequestURL() %>
-  </div>
+  <form action="/user/login" method="post">
+      <div>用户名: <input type="text" name="userName" /> </div>
+      <div>密码: <input type="password" name="pwd"/> </div>
+      <div> <input type="submit"  value="登录"> </div>
+  </form>
+  ​
 
   </body>
 </html>
