@@ -20,6 +20,16 @@
       <div> <input type="submit"  value="登录"> </div>
   </form>
   ​
+  <br/>
+
+  ${name}
+  <br/>
+  <%= (String)request.getAttribute("name")%>
+  <br/><br/>
+  <hr>
+  ${user.name}
+  ${user.id}
+  ${user.host}
 
   </body>
 </html>
