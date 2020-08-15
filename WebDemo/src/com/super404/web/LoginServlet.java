@@ -24,12 +24,18 @@ public class LoginServlet extends HttpServlet {
         System.out.println(name + " " + pwd);
 
         if (name.equals("xdclass") && pwd.equals("123")) {
-            User user = new User();
-            user.setId(123);
-            user.setName(name);
-            user.setHost("xdclass.net");
-            req.getSession().setAttribute("loginUser", user);
-            req.getRequestDispatcher("/WEB-INF/user.jsp").forward(req, resp);
+
+            if (req.getSession().isNew()) {
+                req.setAttribute("msg", "登录失效，请再次登录");
+                req.getRequestDispatcher("/login.jsp").forward(req, resp);
+            } else {
+                User user = new User();
+                user.setId(123);
+                user.setName(name);
+                user.setHost("xdclass.net");
+                req.getSession().setAttribute("loginUser", user);
+                req.getRequestDispatcher("/WEB-INF/user.jsp").forward(req, resp);
+            }
         } else {
             req.setAttribute("msg", "账号密码错误");
             req.getRequestDispatcher("/login.jsp").forward(req, resp);
