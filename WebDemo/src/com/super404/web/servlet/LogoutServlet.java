@@ -1,22 +1,21 @@
-package com.super404.web;
+package com.super404.web.servlet;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/test")
-public class TestServlet extends HttpServlet {
+@WebServlet("/logoutServlet")
+public class LogoutServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.getWriter().write("super404.com");
 
-        ServletContext servletContext = req.getServletContext();
-        String appInfo = (String)servletContext.getAttribute("appInfo");
-        System.out.println("TestServlet appInfo="+appInfo);
+        HttpSession session = req.getSession();
+        session.invalidate();
+        req.getRequestDispatcher("/login.jsp").forward(req, resp);
     }
 }

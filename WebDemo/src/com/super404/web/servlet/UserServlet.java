@@ -1,4 +1,4 @@
-package com.super404.web;
+package com.super404.web.servlet;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
