@@ -9,16 +9,16 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-//@WebFilter(filterName = "customFilter",servletNames = {"getCookieServlet"}, urlPatterns = {"/user/*","/order/*"})
-/*@WebFilter(filterName = "customFilter",urlPatterns = {"/*"},
+@WebFilter(filterName = "loginFilter",urlPatterns = {"/user/*","/order/*"},
         initParams = {
         @WebInitParam(name = "encoding", value = "UTF-8"),
         @WebInitParam(name = "loginPage", value = "/login.jsp")
-        },
-        dispatcherTypes = {DispatcherType.FORWARD, DispatcherType.REQUEST})*/
-public class CustomFilter implements Filter {
+        })
+public class LoginFilter implements Filter {
 
     private FilterConfig filterConfig;
     private String encoding;
@@ -28,11 +28,9 @@ public class CustomFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
-        System.out.println("CustomFilter init");
+        System.out.println("LoginFilter init");
 
         this.filterConfig = filterConfig;
-        String filterName = filterConfig.getFilterName();
-        System.out.println("filterName=" + filterName);
         this.encoding = filterConfig.getInitParameter("encoding");
         this.loginPage = filterConfig.getInitParameter("loginPage");
 
@@ -42,14 +40,22 @@ public class CustomFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-        System.out.println("CustomFilter doFilter");
+        System.out.println("LoginFilter doFilter");
 
         request.setCharacterEncoding(encoding);
         response.setCharacterEncoding(encoding);
         response.setContentType("text/html;charset=utf-8");
 
-        //让请求继续往下走
-        chain.doFilter(request, response);
+        HttpServletRequest httpServletRequest= (HttpServletRequest) request;
+        HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+
+        //session里面有信息让请求继续往下走
+        if (httpServletRequest.getSession().getAttribute("loginUser") != null) {
+            chain.doFilter(request, response);
+        } else {
+            httpServletRequest.setAttribute("msg", "非法访问，请登录");
+            httpServletRequest.getRequestDispatcher(loginPage).forward(httpServletRequest, httpServletResponse);
+        }
 
     }
 
@@ -57,7 +63,7 @@ public class CustomFilter implements Filter {
     @Override
     public void destroy() {
 
-        System.out.println("CustomFilter destroy");
+        System.out.println("LoginFilter destroy");
 
     }
 }
