@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/get_cookie_test")
+@WebServlet(name = "getCookieServlet", urlPatterns = {"/get_cookie_test"})
 public class GetCookieServlet extends HttpServlet {
 
     @Override
