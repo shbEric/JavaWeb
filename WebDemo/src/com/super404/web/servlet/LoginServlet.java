@@ -1,6 +1,6 @@
 package com.super404.web.servlet;
 
-import com.super404.web.User;
+import com.super404.web.domain.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,6 +1,7 @@
 package com.super404.web.servlet;
 
-import com.super404.web.User;
+import com.super404.web.domain.Config;
+import com.super404.web.domain.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +15,11 @@ public class DispatcherServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        Config config = (Config) req.getServletContext().getAttribute("config");
+        System.out.println(config.getTopic());
+        System.out.println(config.getUrl());
+
 
         System.out.println("DispatcherServlet doGet");
 

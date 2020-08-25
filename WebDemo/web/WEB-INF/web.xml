@@ -13,7 +13,7 @@
         <url-pattern>/userServlet</url-pattern>
     </servlet-mapping>-->
 
-    <context-param>
+    <!--<context-param>
         <param-name>url</param-name>
         <param-value>super404.com</param-value>
     </context-param>
@@ -25,5 +25,15 @@
 
     <session-config>
         <session-timeout>1</session-timeout>
-    </session-config>
+    </session-config>-->
+    
+    <context-param>
+        <param-name>url</param-name>
+        <param-value>https://xdclass.net</param-value>
+    </context-param>
+    
+    <context-param>
+        <param-name>topic</param-name>
+        <param-value>小滴课堂java高级工程师成长专题视频</param-value>
+    </context-param>
 </web-app>

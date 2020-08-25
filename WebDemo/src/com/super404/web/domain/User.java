@@ -1,4 +1,4 @@
-package com.super404.web;
+package com.super404.web.domain;
 
 public class User {
 
