@@ -15,5 +15,8 @@
 <hr>
 近30分钟在线人数: ${applicationScope.onlineNum}
 
+<hr>
+应用服务器启动后总访问次数：${totalVisit}
+
 </body>
 </html>

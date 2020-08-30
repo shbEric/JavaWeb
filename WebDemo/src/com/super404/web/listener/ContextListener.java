@@ -27,6 +27,7 @@ public class ContextListener implements ServletContextListener {
 
         //获取上下文对象
         servletContext.setAttribute("onlineNum",0);
+        servletContext.setAttribute("totalVisit",0);
     }
 
     @Override
