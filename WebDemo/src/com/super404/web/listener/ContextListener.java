@@ -24,6 +24,9 @@ public class ContextListener implements ServletContextListener {
         config.setUrl(url);
 
         servletContext.setAttribute("config", config);
+
+        //获取上下文对象
+        servletContext.setAttribute("onlineNum",0);
     }
 
     @Override
