@@ -5,7 +5,7 @@
          version="4.0">
     <!--<servlet>
         <servlet-name>userServlet</servlet-name>
-        <servlet-class>com.super404.web.servlet.UserServlet</servlet-class>
+        <servlet-class>com.super404.web.controller.UserServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>

@@ -1,4 +1,4 @@
-package com.super404.web.servlet;
+package com.super404.web.controller;
 
 import com.super404.web.domain.User;
 
