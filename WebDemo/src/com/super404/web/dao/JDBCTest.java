@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
 
 public class JDBCTest {
     public static void main(String[] args) throws Exception {
@@ -35,7 +36,9 @@ public class JDBCTest {
         connection.close();*/
 
         //testInjectSQL();
-        testPrepareStatement();
+        //testPrepareStatement();
+        //testAdd();
+        testDelete();
     }
 
     //SQL注入攻击的例子
@@ -101,6 +104,56 @@ public class JDBCTest {
 
         //释放连接资源
         resultSet.close();
+        preparedStatement.close();
+        connection.close();
+    }
+
+    //新增记录
+    private static void testAdd() throws Exception{
+        //加载JDBC驱动程序
+        Class.forName("com.mysql.jdbc.Driver");
+
+        //建立数据库连接Connection
+        String username = "root";
+        String password = "123456";
+        //协议:子协议://ip:端口/数据库名称?参数1=值1&参数2=值2
+        String url = "jdbc:mysql://127.0.0.1:3306/xd_web?useUnicode=true&characterEncoding=utf-8&useSSL=false";
+        Connection connection = DriverManager.getConnection(url, username, password);
+
+        //创建执行SQL的语句Statement
+        PreparedStatement preparedStatement = connection.prepareStatement("insert into user(username,pwd,sex,role,create_time) values(?,?,?,?,?)");
+        preparedStatement.setString(1,"二当家小D");
+        preparedStatement.setString(2,"123456");
+        preparedStatement.setInt(3,1);
+        preparedStatement.setInt(4,2);
+        preparedStatement.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
+
+        //处理执行
+        preparedStatement.execute();
+
+        preparedStatement.close();
+        connection.close();
+    }
+
+    //删除记录
+    private static void testDelete() throws Exception{
+        //加载JDBC驱动程序
+        Class.forName("com.mysql.jdbc.Driver");
+
+        //建立数据库连接Connection
+        String username = "root";
+        String password = "123456";
+        //协议:子协议://ip:端口/数据库名称?参数1=值1&参数2=值2
+        String url = "jdbc:mysql://127.0.0.1:3306/xd_web?useUnicode=true&characterEncoding=utf-8&useSSL=false";
+        Connection connection = DriverManager.getConnection(url, username, password);
+
+        //创建执行SQL的语句Statement
+        PreparedStatement preparedStatement = connection.prepareStatement("delete from user where id=?");
+        preparedStatement.setInt(1, 5);
+
+        //处理执行
+        preparedStatement.execute();
+
         preparedStatement.close();
         connection.close();
     }
